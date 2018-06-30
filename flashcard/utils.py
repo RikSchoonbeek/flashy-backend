@@ -1,5 +1,5 @@
 from flashcard.models import ProgrammingLanguage, Topic
-from flashcard.serialiserz import TopicSerializer, SelectionSerializer
+from flashcard.serializers import TopicSerializer, SelectionSerializer
 
 def separate_flashcard_data(all_data):
     """
