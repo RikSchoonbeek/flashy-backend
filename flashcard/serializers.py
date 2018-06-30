@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from flashcard.models import FlashCard, Topic, Selection
+from flashcard.models import FlashCard, ProgrammingLanguage, Topic, Selection
 
 
 class FlashCardSerializer(serializers.ModelSerializer):
@@ -12,6 +12,12 @@ class FlashCardSerializer(serializers.ModelSerializer):
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
+        fields = ('name', )
+
+
+class ProgrammingLanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgrammingLanguage
         fields = ('name', )
 
 
