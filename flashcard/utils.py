@@ -32,12 +32,14 @@ def save_topic(topic_data):
     """
     Saves the topic to database, if it doesn't exist already.
     """
-    # Check if topic already in DB
     try:
-        topic = Topic.objects.get(name=topic_data)
+        topic = Topic.objects.get(name=topic_data['name'])
     except Topic.DoesNotExist:
-        topic_serializer = TopicSerializer(topic_data)
-        topic = topic_serializer.save()
+        topic_serializer = TopicSerializer(data=topic_data)
+        if topic_serializer.is_valid():
+            topic = topic_serializer.save()
+        else:
+            print(f"topic_serializer.errors: {topic_serializer.errors}")
     return topic
 
 
@@ -67,5 +69,8 @@ def save_selection(selection_data):
     """
     Takes a dict of selection data, saves instance to DB.
     """
-    selection_serializer = SelectionSerializer(selection_data)
-    return selection_serializer.save()
+    selection_serializer = SelectionSerializer(data=selection_data)
+    if selection_serializer.is_valid():
+        return selection_serializer.save()
+    else:
+        print(f"selection_serializer.errors: {selection_serializer.errors}")
