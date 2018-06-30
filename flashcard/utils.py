@@ -1,4 +1,4 @@
-from flashcard.models import Topic
+from flashcard.models import ProgrammingLanguage, Topic
 from flashcard.serialiserz import TopicSerializer, SelectionSerializer
 
 def separate_flashcard_data(all_data):
@@ -17,6 +17,15 @@ def separate_flashcard_data(all_data):
         else:
             flashcard_data[key] = value
     return topic_data, flashcard_data, selection_list
+
+
+def add_prog_lang_to_flashcard_data(flashcard_data):
+    """
+    Takes the flashcard_data dict, substitutes the
+    """
+    programming_language = ProgrammingLanguage.objects.get(name=flashcard_data['language'])
+    flashcard_data['language'] = programming_language
+    return flashcard_data
 
 
 def save_topic(topic_data):

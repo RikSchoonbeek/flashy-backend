@@ -1,11 +1,10 @@
 from rest_framework.views import APIView
 
-from flashcard.serializers import FlashCardSerializer, TopicSerializer, LanguageSerializer, \
+from flashcard.serializers import FlashCardSerializer, TopicSerializer, ProgrammingLanguageSerializer, \
     SelectionSerializer
-from rest_framework.views import
 
 from flashcard.utils import separate_flashcard_data, save_topic, \
-    return_selection_data_dict, save_selection
+    return_selection_data_dict, save_selection, add_prog_lang_to_flashcard_data
 
 
 class CreateFlashCard(APIView):
@@ -34,6 +33,8 @@ class CreateFlashCard(APIView):
         # update foreign key instance in flashcard_data
         flashcard_data['topic'] = topic
 
+        # add prog lang instance to flashcard_data
+        flashcard_data = add_prog_lang_to_flashcard_data(flashcard_data)
         # save flashcard and return flashcard instance
         flashcard_serializer = FlashCardSerializer(flashcard_data)
         flashcard = flashcard_serializer.save()
