@@ -1,7 +1,6 @@
 from rest_framework.views import APIView
 
-from flashcard.serializers import FlashCardSerializer, TopicSerializer, ProgrammingLanguageSerializer, \
-    SelectionSerializer
+from flashcard.serializers import FlashCardSerializer, TopicSerializer, SelectionSerializer
 
 from flashcard.utils import separate_flashcard_data, save_topic, \
     return_selection_data_dict, save_selection, add_prog_lang_to_flashcard_data
